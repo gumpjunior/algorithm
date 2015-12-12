@@ -42,6 +42,7 @@ int main() {
     TriangleTopDown cTriangleTopDown(array);
     min_sum = cTriangleTopDown.min_path_sum();
     cout << "test case 1 >> min_sum = " << min_sum << endl;
+    cTriangleTopDown.triangle_display();
 
     //Declaration and initialization way 2
     //vector<vector<int> > array2 = {

@@ -11,11 +11,12 @@ public:
     ~TriangleTopDown();
 
     int min_path_sum();
+    void triangle_display();
     
 private:
     vector<vector<int> >triangle_;
 
-}
+};      //Required.
 
 #endif
 
