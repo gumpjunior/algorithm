@@ -75,6 +75,8 @@ int main(void) {
     //
     //Result var type is float
     //
+    //For division of two integers, NO rounding up to the remainder
+    //part. The remainder will be always cut off.
     float Rfloat;
     Rfloat = Aint / Bint;
     printf("\nint/int:     Rfloat = %f\n", Rfloat);
