@@ -29,6 +29,8 @@ int main(void) {
 	//Although pVar2 has been freed, it is still LEGAL to be called below.
 	printf("var2_value   = %d\n", *(pVar2));	//Print out: var2_value = 0
 	printf("var2_address = %p\n", pVar2);		//print out: var2_address = xxxxx
+    //Free a same pointer twice is ILLEGAL!
+    //free(pVar2);
 
 	return EXIT_SUCCESS;
 
