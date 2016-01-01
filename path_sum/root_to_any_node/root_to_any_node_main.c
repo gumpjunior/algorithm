@@ -19,8 +19,7 @@ void binary_tree_construction2(BiTree* tree);
 void binary_tree_construction3(BiTree* tree);
 void binary_tree_construction4(BiTree* tree);
 void binary_tree_construction5(BiTree* tree);
-int root_to_leaf_path_sum_wrong(BiTreeNode* node);
-int root_to_leaf_path_sum(BiTreeNode* node);
+int root_to_any_node_path_sum(BiTreeNode* node);
 
 int main(void) {
 
@@ -28,7 +27,7 @@ int main(void) {
 
     BiTree  biTree;
     BiTree* pBiTree = &biTree;
-    int sumRootToLeaf = INT_MIN;
+    int sumRootToAnyNode = INT_MIN;
 
     //Test binary tree initialization.
     bitree_init(pBiTree, element_destroy);
@@ -45,12 +44,8 @@ int main(void) {
     bitree_display_int(pBiTree, pBiTree->root);
     printf("\n");
 
-    sumRootToLeaf = root_to_leaf_path_sum_wrong(pBiTree->root);
-    printf("Wrong version result is:");
-    printf("\nMax path sum from root to leaf is %d\n", sumRootToLeaf);
-    sumRootToLeaf = root_to_leaf_path_sum(pBiTree->root);
-    printf("Right version result is:");
-    printf("\nMax path sum from root to leaf is %d\n", sumRootToLeaf);
+    sumRootToAnyNode = root_to_any_node_path_sum(pBiTree->root);
+    printf("\nMax path sum from root to any node is %d\n", sumRootToAnyNode);
 
     //Delete whole tree
     bitree_rem_left(pBiTree, NULL);
@@ -79,12 +74,8 @@ int main(void) {
     bitree_display_int(pBiTree, pBiTree->root);
     printf("\n\n");
 
-    sumRootToLeaf = root_to_leaf_path_sum_wrong(pBiTree->root);
-    printf("Wrong version result is:");
-    printf("\nMax path sum from root to leaf is %d\n", sumRootToLeaf);
-    sumRootToLeaf = root_to_leaf_path_sum(pBiTree->root);
-    printf("Right version result is:");
-    printf("\nMax path sum from root to leaf is %d\n", sumRootToLeaf);
+    sumRootToAnyNode = root_to_any_node_path_sum(pBiTree->root);
+    printf("\nMax path sum from root to any node is %d\n", sumRootToAnyNode);
 
     //Delete whole tree
     bitree_rem_left(pBiTree, NULL);
@@ -100,12 +91,8 @@ int main(void) {
     bitree_display_int(pBiTree, pBiTree->root);
     printf("\n\n");
 
-    sumRootToLeaf = root_to_leaf_path_sum_wrong(pBiTree->root);
-    printf("Wrong version result is:");
-    printf("\nMax path sum from root to leaf is %d\n", sumRootToLeaf);
-    sumRootToLeaf = root_to_leaf_path_sum(pBiTree->root);
-    printf("Right version result is:");
-    printf("\nMax path sum from root to leaf is %d\n", sumRootToLeaf);
+    sumRootToAnyNode = root_to_any_node_path_sum(pBiTree->root);
+    printf("\nMax path sum from root to any node is %d\n", sumRootToAnyNode);
 
     //Delete whole tree
     bitree_rem_left(pBiTree, NULL);
@@ -121,12 +108,8 @@ int main(void) {
     bitree_display_int(pBiTree, pBiTree->root);
     printf("\n\n");
 
-    sumRootToLeaf = root_to_leaf_path_sum_wrong(pBiTree->root);
-    printf("Wrong version result is:");
-    printf("\nMax path sum from root to leaf is %d\n", sumRootToLeaf);
-    sumRootToLeaf = root_to_leaf_path_sum(pBiTree->root);
-    printf("Right version result is:");
-    printf("\nMax path sum from root to leaf is %d\n", sumRootToLeaf);
+    sumRootToAnyNode = root_to_any_node_path_sum(pBiTree->root);
+    printf("\nMax path sum from root to any node is %d\n", sumRootToAnyNode);
 
     //Delete whole tree
     bitree_rem_left(pBiTree, NULL);
@@ -142,12 +125,8 @@ int main(void) {
     bitree_display_int(pBiTree, pBiTree->root);
     printf("\n\n");
 
-    sumRootToLeaf = root_to_leaf_path_sum_wrong(pBiTree->root);
-    printf("Wrong version result is:");
-    printf("\nMax path sum from root to leaf is %d\n", sumRootToLeaf);
-    sumRootToLeaf = root_to_leaf_path_sum(pBiTree->root);
-    printf("Right version result is:");
-    printf("\nMax path sum from root to leaf is %d\n", sumRootToLeaf);
+    sumRootToAnyNode = root_to_any_node_path_sum(pBiTree->root);
+    printf("\nMax path sum from root to any node is %d\n", sumRootToAnyNode);
 
     //Delete whole tree
     bitree_rem_left(pBiTree, NULL);
@@ -160,68 +139,21 @@ int main(void) {
 
 //============================================================
 // This functions applies to both positive number and negative
-// number of node data.
-// This version is very GOOD for recursion learning!!
+// number of node data. 
+// And at least contain one node(root).
 //============================================================
 
-int root_to_leaf_path_sum(BiTreeNode* node) {
-    
-    int pathSum  = INT_MIN;
-    int leftSum  = INT_MIN;
-    int rightSum = INT_MIN;
-
-    if (node->left == NULL && node->right == NULL) {
-        pathSum = *(int*)node->data;
-    }
-    else if (node->left != NULL && node->right != NULL) {
-        leftSum = root_to_leaf_path_sum(node->left);
-        rightSum = root_to_leaf_path_sum(node->right);
-        pathSum = (leftSum > rightSum) ? leftSum : rightSum;
-        pathSum+= *(int*)node->data;
-    }
-    else {          //Either node->left or node->right is NULL
-        BiTreeNode* nodeExisting = (node->left != NULL) ? node->left : node->right;
-        pathSum = root_to_leaf_path_sum(nodeExisting);
-        pathSum+= *(int*)node->data;
-    }
-
-    return pathSum;
-
-}
-
-//============================================================
-// (*)What does this function do:
-// Acquire the max path sum from root to leaf.
-// (*)Note:
-// This is a wrong version. For example, for tree:
-//        -1
-//        /
-//       2
-//      / \
-//    -6  NIL
-//    /
-//   3
-// It will give out the max path sum (-1)+2 = -1. Coz the 
-// following code will recognize "NIL" as a leaf, which is 
-// wrong.
-// (*)If all data in the tree are greater or equal than 0, 
-// then this function works correctly.
-//============================================================
-
-int root_to_leaf_path_sum_wrong(BiTreeNode* node) {
+int root_to_any_node_path_sum(BiTreeNode* node) {
     
     if (node == NULL) {
         return 0;
     }
 
     int pathSum  = INT_MIN;
-    int leftSum  = INT_MIN;
-    int rightSum = INT_MIN;
-
-    leftSum = root_to_leaf_path_sum_wrong(node->left);
-    rightSum = root_to_leaf_path_sum_wrong(node->right);
-
+    int leftSum  = root_to_any_node_path_sum(node->left);
+    int rightSum = root_to_any_node_path_sum(node->right);
     pathSum = (leftSum > rightSum) ? leftSum : rightSum;
+    pathSum = (pathSum > 0) ? pathSum : 0;
     pathSum+= *(int*)node->data;
 
     return pathSum;
