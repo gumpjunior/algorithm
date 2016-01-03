@@ -42,11 +42,11 @@ int main(void) {
     bitree_init(pBiTree, element_destroy);
     test_bitree_init(pBiTree);
 
-    //************************************************************//
+    //============================================================//
     //                                                            //
     //-------------------------- Test 1 --------------------------//
     //                                                            //
-    //************************************************************//
+    //============================================================//
     
     binary_tree_construction(pBiTree);
     printf("\nCall bitree inorder display\n");
@@ -195,6 +195,8 @@ void test_node_parent_list(BiTreeNode* node) {
     }
     else {
         printf("\nNode does NOT exist\n");
+        printf("nodeParents.size() = %lu\n", nodeParents.size());
+        printf("Means if the node is NOT found, the return stack is empty.\n");
     }
 
     return;
