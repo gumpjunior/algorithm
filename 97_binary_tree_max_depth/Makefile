@@ -1,6 +1,6 @@
 objects = binary_tree_max_depth_main.o binary_tree.o
 
-binary_tree_max_depth_main : $(objects)
+all : $(objects)
 	cc -o binary_tree_max_depth_main $(objects)
 
 binary_tree_max_depth_main.o : ../data_structure/binary_tree/binary_tree.h
