@@ -6,3 +6,6 @@ linked_list : $(objects)
 linked_list_main.o : linked_list.h
 linked_list.o : linked_list.h
 
+.PHONY : clean
+clean :
+	-rm linked_list $(objects)
