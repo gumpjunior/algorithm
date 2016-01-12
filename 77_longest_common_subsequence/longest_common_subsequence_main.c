@@ -59,7 +59,7 @@ int longest_common_subsequence(char* str, int strSize, \
     //
     for (i=1; i<strSize; ++i) {
         for (j=1; j<str2Size; ++j) {
-            if (str[i] == str2[j]) {
+            if (str[i-1] == str2[j-1]) {
                 max = (result[i][j-1] > result[i-1][j]) ? result[i][j-1] : result[i-1][j];
                 result[i][j] = (max > (result[i-1][j-1] + 1)) ? max : (result[i-1][j-1] + 1);
             }
